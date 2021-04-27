@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.databinding.TodoListBinding
 import com.eslirodrigues.simpletasktodo.model.Todo
+import com.eslirodrigues.simpletasktodo.ui.ListFragmentDirections
 
 class TodoAdapter(private val todos: MutableList<Todo>) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
     class TodoViewHolder(val binding: TodoListBinding) : RecyclerView.ViewHolder(binding.root)
@@ -43,7 +44,9 @@ class TodoAdapter(private val todos: MutableList<Todo>) : RecyclerView.Adapter<T
         val curTask = todos[position]
         holder.binding.apply {
             imageViewNewListItem.setOnClickListener {
-                Navigation.findNavController(it).navigate(R.id.action_listFragment_to_extendedListFragment)
+                val title = curTask.todo
+                val action = ListFragmentDirections.actionListFragmentToExtendedListFragment(title)
+                Navigation.findNavController(it).navigate(action)
             }
             textViewItem.text = curTask.todo
             checkboxItem.isChecked = curTask.isChecked
