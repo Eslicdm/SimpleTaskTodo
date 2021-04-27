@@ -41,6 +41,7 @@
         android:inputType="text"
         android:maxHeight="45dp"
         android:padding="10dp"
+        android:maxLength="120"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="@color/light_white"
