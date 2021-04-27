@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_todo"
+    app:startDestination="@id/listFragment">
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.eslirodrigues.simpletasktodo.ui.ListFragment"
+        android:label="ListFragment"
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/action_listFragment_to_extendedListFragment"
+            app:destination="@id/extendedListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/extendedListFragment"
+        android:name="com.eslirodrigues.simpletasktodo.ui.ExtendedListFragment"
+        android:label="ExtendedListFragment"
+        tools:layout="@layout/fragment_extended_list">
+        <argument
+            android:name="title"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+</navigation>
