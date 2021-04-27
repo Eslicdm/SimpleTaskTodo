@@ -8,19 +8,19 @@
     android:background="@drawable/rounded_layout">
 
     <ImageView
-        android:id="@+id/imageView_newList_item"
+        android:id="@+id/imageViewExtendedItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/extend_list"
         android:padding="15dp"
         android:src="@drawable/list_add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/textView_item"
+        app:layout_constraintEnd_toStartOf="@id/textViewItem"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView_item"
+        android:id="@+id/textViewItem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
@@ -28,19 +28,19 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/checkbox_item"
-        app:layout_constraintStart_toStartOf="@id/imageView_newList_item"
+        app:layout_constraintEnd_toStartOf="@id/checkboxItem"
+        app:layout_constraintStart_toStartOf="@id/imageViewExtendedItem"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
 
     <CheckBox
-        android:id="@+id/checkbox_item"
+        android:id="@+id/checkboxItem"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textView_item"
+        app:layout_constraintStart_toEndOf="@id/textViewItem"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,7 +43,7 @@ class TodoAdapter(private val todos: MutableList<Todo>) : RecyclerView.Adapter<T
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val curTask = todos[position]
         holder.binding.apply {
-            imageViewNewListItem.setOnClickListener {
+            imageViewExtendedItem.setOnClickListener {
                 val title = curTask.todo
                 val action = ListFragmentDirections.actionListFragmentToExtendedListFragment(title)
                 Navigation.findNavController(it).navigate(action)

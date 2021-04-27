@@ -8,16 +8,16 @@
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_main"
+        android:id="@+id/recyclerViewList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_add"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddList"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/todo_list" />
 
     <EditText
-        android:id="@+id/editText_task"
+        android:id="@+id/editTextTaskList"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_margin="10dp"
@@ -33,11 +33,11 @@
         android:textColor="@color/white"
         android:textColorHint="@color/light_white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_add"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAddList"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button_add"
+        android:id="@+id/buttonAddList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -46,10 +46,10 @@
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/button_delete" />
+        app:layout_constraintEnd_toStartOf="@id/buttonDeleteList" />
 
     <Button
-        android:id="@+id/button_delete"
+        android:id="@+id/buttonDeleteList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

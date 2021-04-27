@@ -7,7 +7,7 @@
     android:background="@color/light_brown">
 
     <TextView
-        android:id="@+id/text_view_item_title"
+        android:id="@+id/textViewItemTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -20,17 +20,17 @@
         tools:text="TITULO DA LISTA AQUI" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_main_fragment"
+        android:id="@+id/recyclerViewExtendedList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_add_fragment"
-        app:layout_constraintTop_toBottomOf="@id/text_view_item_title"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddExtended"
+        app:layout_constraintTop_toBottomOf="@id/textViewItemTitle"
         tools:listitem="@layout/todo_list" />
 
     <EditText
-        android:id="@+id/editText_task_fragment"
+        android:id="@+id/editTextTaskExtended"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_margin="10dp"
@@ -46,11 +46,11 @@
         android:textColor="@color/white"
         android:textColorHint="@color/light_white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_add_fragment"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAddExtended"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button_add_fragment"
+        android:id="@+id/buttonAddExtended"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -59,10 +59,10 @@
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/button_delete_fragment" />
+        app:layout_constraintEnd_toStartOf="@id/buttonDeleteExtended" />
 
     <Button
-        android:id="@+id/button_delete_fragment"
+        android:id="@+id/buttonDeleteExtended"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

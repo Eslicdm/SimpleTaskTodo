@@ -26,8 +26,8 @@ class ListFragment : Fragment() {
 
         todoAdapter = TodoAdapter(mutableListOf())
 
-        binding.recyclerMain.adapter = todoAdapter
-        binding.recyclerMain.layoutManager = LinearLayoutManager(context)
+        binding.recyclerViewList.adapter = todoAdapter
+        binding.recyclerViewList.layoutManager = LinearLayoutManager(context)
 
         addItemClickListener()
         deleteItemClickListener()
@@ -36,18 +36,18 @@ class ListFragment : Fragment() {
     }
 
     private fun addItemClickListener() {
-        binding.buttonAdd.setOnClickListener {
-            val inputText = binding.editTextTask.text.toString()
+        binding.buttonAddList.setOnClickListener {
+            val inputText = binding.editTextTaskList.text.toString()
             if (inputText.isNotEmpty()) {
                 val task = Todo(inputText)
                 todoAdapter.addTodo(task)
-                binding.editTextTask.text.clear()
+                binding.editTextTaskList.text.clear()
             }
         }
     }
 
     private fun deleteItemClickListener() {
-        binding.buttonDelete.setOnClickListener {
+        binding.buttonDeleteList.setOnClickListener {
             todoAdapter.deleteDoneTodo()
         }
     }
