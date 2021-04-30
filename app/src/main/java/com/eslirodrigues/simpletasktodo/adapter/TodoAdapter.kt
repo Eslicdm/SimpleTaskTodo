@@ -1,16 +1,12 @@
 package com.eslirodrigues.simpletasktodo.adapter
 
 import android.graphics.Paint
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
-import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.RecyclerView
-import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.databinding.TodoListBinding
 import com.eslirodrigues.simpletasktodo.model.Todo
 import com.eslirodrigues.simpletasktodo.ui.ListFragmentDirections
