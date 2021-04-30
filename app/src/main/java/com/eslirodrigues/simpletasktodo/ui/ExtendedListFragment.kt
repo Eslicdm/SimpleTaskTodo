@@ -33,7 +33,7 @@ class ExtendedListFragment : Fragment(){
 
         binding.textViewItemTitle.text = title
 
-        todoAdapter = TodoAdapter(mutableListOf())
+        todoAdapter = TodoAdapter(mutableListOf(), false)
 
         binding.recyclerViewExtendedList.adapter = todoAdapter
         binding.recyclerViewExtendedList.layoutManager = LinearLayoutManager(context)

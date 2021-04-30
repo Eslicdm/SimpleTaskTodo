@@ -31,7 +31,7 @@ class ListFragment : Fragment() {
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
 
-        todoAdapter = TodoAdapter(mutableListOf())
+        todoAdapter = TodoAdapter(mutableListOf(), true)
 
         binding.recyclerViewList.adapter = todoAdapter
         binding.recyclerViewList.layoutManager = LinearLayoutManager(context)

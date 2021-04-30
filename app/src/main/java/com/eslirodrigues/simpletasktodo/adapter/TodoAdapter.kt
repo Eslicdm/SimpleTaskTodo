@@ -1,7 +1,9 @@
 package com.eslirodrigues.simpletasktodo.adapter
 
 import android.graphics.Paint
+import android.opengl.Visibility
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentTransaction
@@ -13,7 +15,7 @@ import com.eslirodrigues.simpletasktodo.databinding.TodoListBinding
 import com.eslirodrigues.simpletasktodo.model.Todo
 import com.eslirodrigues.simpletasktodo.ui.ListFragmentDirections
 
-class TodoAdapter(private val todos: MutableList<Todo>) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+class TodoAdapter(private val todos: MutableList<Todo>, private val newListVisibility: Boolean) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
     class TodoViewHolder(val binding: TodoListBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
@@ -43,10 +45,15 @@ class TodoAdapter(private val todos: MutableList<Todo>) : RecyclerView.Adapter<T
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val curTask = todos[position]
         holder.binding.apply {
-            imageViewExtendedItem.setOnClickListener {
-                val title = curTask.todo
-                val action = ListFragmentDirections.actionListFragmentToExtendedListFragment(title)
-                Navigation.findNavController(it).navigate(action)
+            if (newListVisibility) {
+                imageViewExtendedItem.setOnClickListener {
+                    val title = curTask.todo
+                    val action =
+                        ListFragmentDirections.actionListFragmentToExtendedListFragment(title)
+                    Navigation.findNavController(it).navigate(action)
+                }
+            } else {
+                imageViewExtendedItem.visibility = View.INVISIBLE
             }
             textViewItem.text = curTask.todo
             checkboxItem.isChecked = curTask.isChecked
