@@ -25,7 +25,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAddExtended"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDeleteExtended"
         app:layout_constraintTop_toBottomOf="@id/textViewItemTitle"
         tools:listitem="@layout/todo_list" />
 
@@ -46,20 +46,9 @@
         android:textColor="@color/white"
         android:textColorHint="@color/light_white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonAddExtended"
+        app:layout_constraintEnd_toStartOf="@+id/buttonDeleteExtended"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/buttonAddExtended"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/rounded_layout_light_brown"
-        android:text="@string/add"
-        app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/buttonDeleteExtended" />
 
     <Button
         android:id="@+id/buttonDeleteExtended"

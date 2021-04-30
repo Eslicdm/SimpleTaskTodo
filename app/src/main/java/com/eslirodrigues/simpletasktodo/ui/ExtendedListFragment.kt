@@ -1,9 +1,12 @@
 package com.eslirodrigues.simpletasktodo.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,13 +45,20 @@ class ExtendedListFragment : Fragment(){
     }
 
     private fun addItemClickListener() {
-        binding.buttonAddExtended.setOnClickListener {
-            val inputText = binding.editTextTaskExtended.text.toString()
-            if (inputText.isNotEmpty()) {
-                val task = Todo(inputText)
-                todoAdapter.addTodo(task)
-                binding.editTextTaskExtended.text.clear()
+        binding.editTextTaskExtended.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                val inputText = binding.editTextTaskExtended.text.toString()
+                if (inputText.isNotEmpty()) {
+                    val task = Todo(inputText)
+                    todoAdapter.addTodo(task)
+                    binding.editTextTaskExtended.text.clear()
+                }
+
+                val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view?.windowToken, 0)
+                return@setOnEditorActionListener true
             }
+            return@setOnEditorActionListener false
         }
     }
 
