@@ -1,4 +1,4 @@
-package com.eslirodrigues.simpletasktodo.model
+package com.eslirodrigues.simpletasktodo.data.model
 
 data class Todo(
     val todo: String,

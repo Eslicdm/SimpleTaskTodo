@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.eslirodrigues.simpletasktodo.databinding.TodoListBinding
-import com.eslirodrigues.simpletasktodo.model.Todo
+import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.ui.ListFragmentDirections
 
 class TodoAdapter(private val todos: MutableList<Todo>, private val newListVisibility: Boolean) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {

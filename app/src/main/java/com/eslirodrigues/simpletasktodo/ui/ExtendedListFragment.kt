@@ -12,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eslirodrigues.simpletasktodo.adapter.TodoAdapter
 import com.eslirodrigues.simpletasktodo.databinding.FragmentExtendedListBinding
-import com.eslirodrigues.simpletasktodo.model.Todo
+import com.eslirodrigues.simpletasktodo.data.model.Todo
 
 class ExtendedListFragment : Fragment(){
 
