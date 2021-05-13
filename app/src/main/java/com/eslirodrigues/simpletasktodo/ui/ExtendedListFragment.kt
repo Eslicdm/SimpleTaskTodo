@@ -33,40 +33,40 @@ class ExtendedListFragment : Fragment(){
 
         binding.textViewItemTitle.text = title
 
-        todoAdapter = TodoAdapter(mutableListOf(), false)
+//        todoAdapter = TodoAdapter(mutableListOf(), false)
 
         binding.recyclerViewExtendedList.adapter = todoAdapter
         binding.recyclerViewExtendedList.layoutManager = LinearLayoutManager(context)
 
-        addItemClickListener()
-        deleteItemClickListener()
+//        addItemClickListener()
+//        deleteItemClickListener()
 
         return binding.root
     }
 
-    private fun addItemClickListener() {
-        binding.editTextTaskExtended.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                val inputText = binding.editTextTaskExtended.text.toString()
-                if (inputText.isNotEmpty()) {
-                    val task = Todo(inputText)
-                    todoAdapter.addTodo(task)
-                    binding.editTextTaskExtended.text.clear()
-                }
-
-                val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(view?.windowToken, 0)
-                return@setOnEditorActionListener true
-            }
-            return@setOnEditorActionListener false
-        }
-    }
-
-    private fun deleteItemClickListener() {
-        binding.buttonDeleteExtended.setOnClickListener {
-            todoAdapter.deleteDoneTodo()
-        }
-    }
+//    private fun addItemClickListener() {
+//        binding.editTextTaskExtended.setOnEditorActionListener { _, actionId, _ ->
+//            if (actionId == EditorInfo.IME_ACTION_DONE) {
+//                val inputText = binding.editTextTaskExtended.text.toString()
+//                if (inputText.isNotEmpty()) {
+//                    val task = Todo(inputText)
+//                    todoAdapter.addTodo(task)
+//                    binding.editTextTaskExtended.text.clear()
+//                }
+//
+//                val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//                imm.hideSoftInputFromWindow(view?.windowToken, 0)
+//                return@setOnEditorActionListener true
+//            }
+//            return@setOnEditorActionListener false
+//        }
+//    }
+//
+//    private fun deleteItemClickListener() {
+//        binding.buttonDeleteExtended.setOnClickListener {
+//            todoAdapter.deleteDoneTodo()
+//        }
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

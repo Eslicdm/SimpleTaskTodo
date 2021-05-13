@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.CheckBox
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eslirodrigues.simpletasktodo.adapter.TodoAdapter
 import com.eslirodrigues.simpletasktodo.databinding.FragmentListBinding
 import com.eslirodrigues.simpletasktodo.data.model.Todo
+import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
 
 
 class ListFragment : Fragment() {
@@ -21,7 +24,7 @@ class ListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var todoAdapter: TodoAdapter
-    private lateinit var edit: EditText
+    private lateinit var todoViewModel: TodoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,24 +33,29 @@ class ListFragment : Fragment() {
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
 
-        todoAdapter = TodoAdapter(mutableListOf(), true)
+        todoAdapter = TodoAdapter(true)
 
         binding.recyclerViewList.adapter = todoAdapter
         binding.recyclerViewList.layoutManager = LinearLayoutManager(context)
 
-        addItemClickListener()
-        deleteItemClickListener()
+        todoViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
+        todoViewModel.readAllData.observe(viewLifecycleOwner) { todo ->
+            todoAdapter.setData(todo)
+        }
+
+        insertTodo()
+//        deleteItemClickListener()
 
         return binding.root
     }
 
-    private fun addItemClickListener() {
+    private fun insertTodo() {
         binding.editTextTaskList.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 val inputText = binding.editTextTaskList.text.toString()
                 if (inputText.isNotEmpty()) {
-                    val task = Todo(inputText)
-                    todoAdapter.addTodo(task)
+                    val todo = Todo(todo = inputText)
+                    todoViewModel.addTodo(todo)
                     binding.editTextTaskList.text.clear()
                 }
 
@@ -59,11 +67,11 @@ class ListFragment : Fragment() {
         }
     }
 
-    private fun deleteItemClickListener() {
-        binding.buttonDeleteList.setOnClickListener {
-            todoAdapter.deleteDoneTodo()
-        }
-    }
+//    private fun deleteItemClickListener() {
+//        binding.buttonDeleteList.setOnClickListener {
+//            todoAdapter.deleteDoneTodo()
+//        }
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
