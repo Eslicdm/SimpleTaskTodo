@@ -4,17 +4,12 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.eslirodrigues.simpletasktodo.databinding.TodoListBinding
 import com.eslirodrigues.simpletasktodo.data.model.Todo
-import com.eslirodrigues.simpletasktodo.ui.ListFragment
+import com.eslirodrigues.simpletasktodo.databinding.TodoListBinding
 import com.eslirodrigues.simpletasktodo.ui.ListFragmentDirections
-import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
 
 class TodoAdapter(private val newListVisibility: Boolean) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
 
@@ -49,6 +44,10 @@ class TodoAdapter(private val newListVisibility: Boolean) : RecyclerView.Adapter
                 todoStrikeThrough(textViewItem, isChecked)
                 curTask.isChecked = !curTask.isChecked
 
+            }
+
+            textViewItem.setOnClickListener {
+                Navigation.findNavController(it).navigate(ListFragmentDirections.actionListFragmentToUpdateDialogFragment(curTask))
             }
         }
     }

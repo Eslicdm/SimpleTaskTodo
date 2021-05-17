@@ -23,4 +23,6 @@
     <string name="already_account">Já tem uma conta?</string>
     <string name="create_account">Create Account</string>
     <string name="sign_up">Sign Up</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>
