@@ -1,0 +1,27 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108"
+    android:autoMirrored="true">
+  <group android:scaleX="0.10125"
+      android:scaleY="0.10125"
+      android:translateX="28.08"
+      android:translateY="28.08">
+      <path android:fillColor="#f87f4f" android:name="background" android:pathData="m-1 0h513v512h-513v-512z"/>
+      <path android:fillColor="#fff" android:name="moldura externa" android:pathData="m54 26h404c11 0 20 9 20 20v415c0 11 -9 20 -20 20h-404c-11 0 -20 -9 -20 -20v-415c0 -11 9 -20 20 -20z"/>
+      <path android:fillColor="#f87f4f" android:name="moldura interna" android:pathData="m66 40h380c11 0 20 9 20 20v387c0 11 -9 20 -20 20h-380c-11 0 -20 -9 -20 -20v-387c0 -11 9 -20 20 -20z"/>
+      <path android:fillColor="#fff" android:name="retangulo maior" android:pathData="m198 0h116c11 0 20 9 20 20v56c0 11 -9 20 -20 20h-116c-11 0 -20 -9 -20 -20v-56c0 -11 9 -20 20 -20z"/>
+      <path android:fillColor="#f87f4f" android:name="retangulo medio" android:pathData="m212 -13h88c11 0 20 9 20 20v39c0 11 -9 20 -20 20h-88c-11 0 -20 -9 -20 -20v-39c0 -11 9 -20 20 -20z"/>
+      <path android:fillColor="#fff" android:name="retangulo menor" android:pathData="m228 -13h54c11 0 20 9 20 20v21c0 11 -9 20 -20 20h-54c-11 0 -20 -9 -20 -20v-21c0 -11 9 -20 20 -20z"/>
+      <path android:fillColor="#fff" android:name="linha 1" android:pathData="m93.5 178h229c5.2 0 9.5 4.3 9.5 9.5c0 5.2 -4.3 9.5 -9.5 9.5h-229c-5.2 0 -9.5 -4.3 -9.5 -9.5c0 -5.2 4.3 -9.5 9.5 -9.5z"/>
+      <path android:fillColor="#fff" android:name="linha 2" android:pathData="m93.5 269h229c5.2 0 9.5 4.3 9.5 9.5c0 5.2 -4.3 9.5 -9.5 9.5h-229c-5.2 0 -9.5 -4.3 -9.5 -9.5c0 -5.2 4.3 -9.5 9.5 -9.5z"/>
+      <path android:fillColor="#fff" android:name="linha 3" android:pathData="m93.5 368h229c5.2 0 9.5 4.3 9.5 9.5c0 5.2 -4.3 9.5 -9.5 9.5h-229c-5.2 0 -9.5 -4.3 -9.5 -9.5c0 -5.2 4.3 -9.5 9.5 -9.5z"/>
+      <path android:fillColor="#fff" android:name="checkbox 1" android:pathData="m385 151h54c4.4 0 8 3.6 8 8v49c0 4.4 -3.6 8 -8 8h-54c-4.4 0 -8 -3.6 -8 -8v-49c0 -4.4 3.6 -8 8 -8z"/>
+      <path android:fillColor="#fff" android:name="checkbox 2" android:pathData="m385 246h54c4.4 0 8 3.6 8 8v49c0 4.4 -3.6 8 -8 8h-54c-4.4 0 -8 -3.6 -8 -8v-49c0 -4.4 3.6 -8 8 -8z"/>
+      <path android:fillColor="#fff" android:name="checkbox 3" android:pathData="m385 345h54c4.4 0 8 3.6 8 8v49c0 4.4 -3.6 8 -8 8h-54c-4.4 0 -8 -3.6 -8 -8v-49c0 -4.4 3.6 -8 8 -8z"/>
+      <path android:fillColor="#f87f4f" android:name="check 1" android:pathData="m429.6 166.5 -19.5 21.2 -11.4 -13.7 -6.6 6.5 12.1 14.6 -0.3 0.3 2.4 2.2 2.8 3.4 0.4 -0.4 1 0.9 25.8 -27.9 -0.5 -0.5 0.5 -0.5 -6.6 -6.1z"/>
+      <path android:fillColor="#f87f4f" android:name="check 2" android:pathData="m429.6 261.5 -19.5 21.2 -11.4 -13.7 -6.6 6.5 12.1 14.6 -0.3 0.3 2.4 2.2 2.8 3.4 0.4 -0.4 1 0.9 25.8 -27.9 -0.5 -0.5 0.5 -0.5 -6.6 -6.1z"/>
+      <path android:fillColor="#f87f4f" android:name="check 3" android:pathData="m429.6 360.5 -19.5 21.2 -11.4 -13.7 -6.6 6.5 12.1 14.6 -0.3 0.3 2.4 2.2 2.8 3.4 0.4 -0.4 1 0.9 25.8 -27.9 -0.5 -0.5 0.5 -0.5 -6.6 -6.1z"/>
+  </group>
+</vector>
