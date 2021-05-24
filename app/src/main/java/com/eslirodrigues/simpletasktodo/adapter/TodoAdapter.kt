@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.databinding.TodoListBinding
 import com.eslirodrigues.simpletasktodo.ui.ListFragmentDirections
+import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
 
-class TodoAdapter(private val newListVisibility: Boolean) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+class TodoAdapter(private val newListVisibility: Boolean, private val viewModel: TodoViewModel) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
 
-    private var todos = emptyList<Todo>()
+    private var todos = mutableListOf<Todo>()
 
     class TodoViewHolder(val binding: TodoListBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -43,7 +44,7 @@ class TodoAdapter(private val newListVisibility: Boolean) : RecyclerView.Adapter
             checkboxItem.setOnCheckedChangeListener { _, isChecked ->
                 todoStrikeThrough(textViewItem, isChecked)
                 curTask.isChecked = !curTask.isChecked
-
+                viewModel.updateTodo(curTask)
             }
 
             textViewItem.setOnClickListener {
@@ -64,7 +65,7 @@ class TodoAdapter(private val newListVisibility: Boolean) : RecyclerView.Adapter
         }
     }
 
-    fun setData(todo: List<Todo>) {
+    fun setData(todo: MutableList<Todo>) {
         this.todos = todo
         notifyDataSetChanged()
     }

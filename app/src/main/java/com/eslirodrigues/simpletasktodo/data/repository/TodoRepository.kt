@@ -6,7 +6,7 @@ import com.eslirodrigues.simpletasktodo.data.model.Todo
 
 class TodoRepository(private val todoDao: TodoDao) {
 
-    val readAllData: LiveData<List<Todo>> = todoDao.readAllData()
+    val readAllData: LiveData<MutableList<Todo>> = todoDao.readAllData()
 
     suspend fun addTodo(todo: Todo) {
         todoDao.addTodo(todo)
@@ -14,14 +14,6 @@ class TodoRepository(private val todoDao: TodoDao) {
 
     suspend fun updateTodo(todo: Todo) {
         todoDao.updateTodo(todo)
-    }
-
-    suspend fun updateCheckbox(id: Int, checkbox: Boolean) {
-        todoDao.updateCheckbox(id, checkbox)
-    }
-
-    suspend fun deleteTodo(todo: Todo) {
-        todoDao.deleteTodo(todo)
     }
 
     suspend fun deleteAllTodos() {

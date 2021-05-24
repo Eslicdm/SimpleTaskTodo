@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
-    val readAllData: LiveData<List<Todo>>
+    val readAllData: LiveData<MutableList<Todo>>
     private val repository: TodoRepository
 
     init {
@@ -31,18 +31,6 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     fun updateTodo(todo: Todo) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateTodo(todo)
-        }
-    }
-
-    fun updateCheckbox(id: Int, checkbox: Boolean) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.updateCheckbox(id, checkbox)
-        }
-    }
-
-    fun deleteTodo(todo: Todo) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteTodo(todo)
         }
     }
 
