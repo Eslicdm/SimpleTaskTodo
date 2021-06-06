@@ -13,9 +13,6 @@ interface TodoDao {
     @Update
     suspend fun updateTodo(todo: Todo)
 
-    @Query("UPDATE todo_table SET isChecked = :check WHERE id = :id")
-    suspend fun updateCheckbox(id: Int, check: Boolean)
-
     @Query("DELETE FROM todo_table WHERE isChecked = 1")
     suspend fun deleteAllTodos()
 

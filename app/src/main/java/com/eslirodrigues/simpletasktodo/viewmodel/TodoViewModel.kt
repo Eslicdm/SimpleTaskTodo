@@ -3,7 +3,6 @@ package com.eslirodrigues.simpletasktodo.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eslirodrigues.simpletasktodo.data.database.TodoDatabase
 import com.eslirodrigues.simpletasktodo.data.model.Todo

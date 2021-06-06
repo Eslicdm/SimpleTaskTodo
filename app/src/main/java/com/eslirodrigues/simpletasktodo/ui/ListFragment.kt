@@ -10,10 +10,12 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.adapter.TodoAdapter
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.databinding.FragmentListBinding
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class ListFragment : Fragment() {
@@ -67,35 +69,20 @@ class ListFragment : Fragment() {
 
     private fun deleteTodos() {
         binding.buttonDeleteList.setOnClickListener {
-            todoViewModel.deleteAllTodos()
+            val snackBar = Snackbar.make(it, R.string.todo_deleted, Snackbar.LENGTH_LONG)
+            snackBar.setAction(R.string.undo) {
+
+            }
+            snackBar.addCallback(object : Snackbar.Callback() {
+                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                    if (event == DISMISS_EVENT_TIMEOUT) {
+                        todoViewModel.deleteAllTodos()
+                    }
+                }
+            })
+            snackBar.show()
         }
     }
-
-//    private fun deleteItemClickListener() {
-//        binding.buttonDeleteList.setOnClickListener {
-//            val todos = todoViewModel.readAllData
-//
-//            val builder = AlertDialog.Builder(requireContext())
-//                .setPositiveButton("Yes") { _, _ ->
-//                    todoViewModel.de
-//                    Toast.makeText(requireContext(), "Successfully removed everything}", Toast.LENGTH_SHORT).show()
-//                }
-//                .setNegativeButton("No") { _, _ ->
-//
-//                }
-//                .setTitle("Delete everything?")
-//                .setMessage("Are you sure you want to delete everything")
-//                .create()
-//                .show()
-//
-//        }
-//        }
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
