@@ -80,6 +80,7 @@ class ListFragment : Fragment() {
                 override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                     if (event == DISMISS_EVENT_TIMEOUT) {
                         todoViewModel.deleteAllTodos()
+                        Toast.makeText(requireContext(), R.string.deleted, Toast.LENGTH_SHORT).show()
                     }
                 }
             })
