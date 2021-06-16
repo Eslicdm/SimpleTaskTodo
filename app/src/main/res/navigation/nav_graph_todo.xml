@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_listFragment_to_updateDialogFragment"
             app:destination="@id/updateDialogFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_deleteConfirmationFragment"
+            app:destination="@id/deleteConfirmationFragment" />
     </fragment>
     <fragment
         android:id="@+id/extendedListFragment"
@@ -38,6 +41,15 @@
             app:argType="com.eslirodrigues.simpletasktodo.data.model.Todo" />
         <action
             android:id="@+id/action_updateDialogFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/deleteConfirmationFragment"
+        tools:layout="@layout/fragment_delete_confirmation_dialog"
+        android:name="com.eslirodrigues.simpletasktodo.ui.DeleteConfirmationFragment"
+        android:label="DeleteConfirmationFragment" >
+        <action
+            android:id="@+id/action_deleteConfirmationFragment_to_listFragment"
             app:destination="@id/listFragment" />
     </dialog>
 </navigation>

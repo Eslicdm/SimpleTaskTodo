@@ -10,13 +10,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.adapter.TodoAdapter
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.databinding.FragmentListBinding
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
-import com.google.android.material.snackbar.Snackbar
 
 
 class ListFragment : Fragment() {
@@ -71,20 +71,14 @@ class ListFragment : Fragment() {
     }
 
     private fun deleteTodos() {
-        binding.buttonDeleteList.setOnClickListener {
-            val snackBar = Snackbar.make(it, R.string.todo_deleted, Snackbar.LENGTH_LONG)
-            snackBar.setAction(R.string.undo) {
-
-            }
-            snackBar.addCallback(object : Snackbar.Callback() {
-                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                    if (event == DISMISS_EVENT_TIMEOUT) {
-                        todoViewModel.deleteAllTodos()
-                        Toast.makeText(requireContext(), R.string.deleted, Toast.LENGTH_SHORT).show()
-                    }
+        todoViewModel.readCheckboxDataStore.observe(viewLifecycleOwner) { isChecked ->
+            if (isChecked) {
+                todoViewModel.deleteAllTodos()
+            } else {
+                binding.buttonDeleteList.setOnClickListener {
+                    findNavController().navigate(R.id.action_listFragment_to_deleteConfirmationFragment)
                 }
-            })
-            snackBar.show()
+            }
         }
     }
 
