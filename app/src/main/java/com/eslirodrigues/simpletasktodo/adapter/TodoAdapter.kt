@@ -4,27 +4,32 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import android.widget.TextView
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.eslirodrigues.simpletasktodo.adapter.TodoAdapter.*
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.databinding.TodoListBinding
 import com.eslirodrigues.simpletasktodo.ui.ListFragmentDirections
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
 
-class TodoAdapter(private val newListVisibility: Boolean, private val viewModel: TodoViewModel) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+class TodoAdapter(
+    private val newListVisibility: Boolean,
+    private val viewModel: TodoViewModel
+) : ListAdapter<Todo, TodoViewHolder>(DIFF_CALLBACK) {
 
     private var todos = mutableListOf<Todo>()
 
     class TodoViewHolder(val binding: TodoListBinding) : RecyclerView.ViewHolder(binding.root)
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         return TodoViewHolder(TodoListBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        val curTask = todos[position]
+        val curTask = getItem(position)
         holder.binding.apply {
             if (newListVisibility) {
                 imageViewExtendedItem.setOnClickListener {
@@ -53,10 +58,6 @@ class TodoAdapter(private val newListVisibility: Boolean, private val viewModel:
         }
     }
 
-    override fun getItemCount(): Int {
-        return todos.size
-    }
-
     private fun todoStrikeThrough(taskText: TextView, isChecked: Boolean) {
         if (isChecked) {
             taskText.paintFlags = taskText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -68,6 +69,24 @@ class TodoAdapter(private val newListVisibility: Boolean, private val viewModel:
     fun setData(todo: MutableList<Todo>) {
         this.todos = todo
         notifyDataSetChanged()
+    }
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Todo>() {
+            override fun areItemsTheSame(
+                oldItem: Todo,
+                newItem: Todo
+            ): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(
+                oldItem: Todo,
+                newItem: Todo
+            ): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 
 }

@@ -24,7 +24,6 @@ class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var todoAdapter: TodoAdapter
     private val todoViewModel: TodoViewModel by viewModel()
 
     override fun onCreateView(
@@ -34,19 +33,24 @@ class ListFragment : Fragment() {
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
 
-        todoAdapter = TodoAdapter(true, todoViewModel)
-
-        binding.recyclerViewList.adapter = todoAdapter
-        binding.recyclerViewList.layoutManager = LinearLayoutManager(context)
-
-        todoViewModel.readAllData.observe(viewLifecycleOwner) { todo ->
-            todoAdapter.setData(todo)
-        }
-
+        initRecyclerView()
         insertTodo()
         deleteTodos()
 
         return binding.root
+    }
+
+    private fun initRecyclerView() {
+        binding.apply {
+            recyclerViewList.apply {
+                val todoAdapter = TodoAdapter(true, todoViewModel)
+                adapter = todoAdapter
+                layoutManager = LinearLayoutManager(context)
+                todoViewModel.readAllData.observe(viewLifecycleOwner) { todo ->
+                    todoAdapter.submitList(todo)
+                }
+            }
+        }
     }
 
     private fun insertTodo() {
