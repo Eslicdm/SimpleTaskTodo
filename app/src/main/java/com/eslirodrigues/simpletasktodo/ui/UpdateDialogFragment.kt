@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.databinding.FragmentUpdateDialogBinding
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
-import kotlinx.android.synthetic.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UpdateDialogFragment : DialogFragment() {
 
@@ -22,7 +21,7 @@ class UpdateDialogFragment : DialogFragment() {
 
     private val args: UpdateDialogFragmentArgs by navArgs()
 
-    private lateinit var todoViewModel: TodoViewModel
+    private val todoViewModel: TodoViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,8 +29,6 @@ class UpdateDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentUpdateDialogBinding.inflate(inflater, container, false)
-
-        todoViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
 
         val todo = args.curTodo
 

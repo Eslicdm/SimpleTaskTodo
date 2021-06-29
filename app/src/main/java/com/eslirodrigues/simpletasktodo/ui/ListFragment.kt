@@ -9,7 +9,6 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eslirodrigues.simpletasktodo.R
@@ -17,6 +16,7 @@ import com.eslirodrigues.simpletasktodo.adapter.TodoAdapter
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.databinding.FragmentListBinding
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ListFragment : Fragment() {
@@ -25,7 +25,7 @@ class ListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var todoAdapter: TodoAdapter
-    private lateinit var todoViewModel: TodoViewModel
+    private val todoViewModel: TodoViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +34,6 @@ class ListFragment : Fragment() {
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
 
-        todoViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
         todoAdapter = TodoAdapter(true, todoViewModel)
 
         binding.recyclerViewList.adapter = todoAdapter

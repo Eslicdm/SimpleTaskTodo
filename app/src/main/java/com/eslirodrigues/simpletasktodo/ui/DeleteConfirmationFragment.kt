@@ -10,13 +10,14 @@ import androidx.navigation.fragment.findNavController
 import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.databinding.FragmentDeleteConfirmationDialogBinding
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DeleteConfirmationFragment : DialogFragment() {
 
     private var _binding: FragmentDeleteConfirmationDialogBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var todoViewModel: TodoViewModel
+    private val todoViewModel: TodoViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,10 +25,6 @@ class DeleteConfirmationFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDeleteConfirmationDialogBinding.inflate(inflater, container, false)
-
-        todoViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
-
-
 
         binding.buttonConfirmDelete.setOnClickListener {
             todoViewModel.deleteAllTodos()

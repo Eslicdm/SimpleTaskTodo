@@ -1,25 +1,17 @@
 package com.eslirodrigues.simpletasktodo.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.*
-import com.eslirodrigues.simpletasktodo.data.database.TodoDatabase
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.data.repository.TodoRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.util.concurrent.Flow
 
-class TodoViewModel(application: Application) : AndroidViewModel(application) {
+class TodoViewModel(private val repository: TodoRepository) : ViewModel() {
 
-    val readAllData: LiveData<MutableList<Todo>>
-    private val repository: TodoRepository
-
-    init {
-        val todoDao = TodoDatabase.getInstance(application).todoDao()
-        repository = TodoRepository(todoDao, application)
-        readAllData = repository.readAllData
-    }
+    val readAllData: LiveData<MutableList<Todo>> = repository.readAllData
 
     val readCheckboxDataStore = repository.readCheckboxDataStore.asLiveData()
 

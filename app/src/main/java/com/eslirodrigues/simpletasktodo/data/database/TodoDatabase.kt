@@ -10,24 +10,4 @@ import com.eslirodrigues.simpletasktodo.data.model.Todo
 abstract class TodoDatabase : RoomDatabase() {
 
     abstract fun todoDao() : TodoDao
-
-    companion object {
-        @Volatile
-        private var INSTANCE: TodoDatabase? = null
-
-        fun getInstance(context: Context) : TodoDatabase {
-            synchronized(this) {
-                var instance: TodoDatabase? = INSTANCE
-                if (instance == null) {
-                    instance = Room.databaseBuilder(
-                        context,
-                        TodoDatabase::class.java,
-                        "todo_database"
-                    ).build()
-                }
-                return instance
-            }
-        }
-
-    }
 }
