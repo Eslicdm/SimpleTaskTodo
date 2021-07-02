@@ -13,7 +13,7 @@
     <string name="make_login">Fazer Login</string>
 
     <!--  Login and Sign-up  -->
-    <string name="enter_your_account">Entre com sua a conta</string>
+    <string name="enter_your_account">Entre com a sua conta</string>
     <string name="email">Email</string>
     <string name="password">Senha</string>
     <string name="forgot_pass">Esqueceu sua senha?</string>
