@@ -127,7 +127,7 @@
                         android:id="@+id/textViewSignUp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/register_now"
+                        android:text="@string/sign_up"
                         android:textColor="@color/light_brown_darker" />
                 </LinearLayout>
 

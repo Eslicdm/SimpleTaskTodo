@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_todo"
-    app:startDestination="@id/listFragment">
+    app:startDestination="@id/signInFragment">
 
     <fragment
         android:id="@+id/listFragment"
@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_listFragment_to_deleteConfirmationFragment"
             app:destination="@id/deleteConfirmationFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/extendedListFragment"
@@ -52,4 +55,25 @@
             android:id="@+id/action_deleteConfirmationFragment_to_listFragment"
             app:destination="@id/listFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/signInFragment"
+        tools:layout="@layout/fragment_sign_in"
+        android:name="com.eslirodrigues.simpletasktodo.ui.login.SignInFragment"
+        android:label="Sign In" >
+        <action
+            android:id="@+id/action_signInFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        tools:layout="@layout/fragment_sign_up"
+        android:name="com.eslirodrigues.simpletasktodo.ui.login.SignUpFragment"
+        android:label="Sign Up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
 </navigation>

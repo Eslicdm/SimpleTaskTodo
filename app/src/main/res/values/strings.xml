@@ -9,7 +9,7 @@
     <string name="extend_list">Extend List</string>
 
     <!--  Menu  -->
-    <string name="exit">Exit</string>
+    <string name="logout">Log out</string>
 
     <!--  Login and Sign-up  -->
     <string name="enter_your_account">Enter with your account</string>

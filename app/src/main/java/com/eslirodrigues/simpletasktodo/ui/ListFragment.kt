@@ -2,12 +2,11 @@ package com.eslirodrigues.simpletasktodo.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +31,9 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
+
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbarTodo)
+        setHasOptionsMenu(true)
 
         initRecyclerView()
         insertTodo()
@@ -82,6 +84,17 @@ class ListFragment : Fragment() {
                     findNavController().navigate(R.id.action_listFragment_to_deleteConfirmationFragment)
                 }
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_top, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
