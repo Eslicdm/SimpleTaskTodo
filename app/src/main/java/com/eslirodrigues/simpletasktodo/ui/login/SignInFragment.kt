@@ -25,6 +25,8 @@ class SignInFragment : Fragment() {
     ): View {
         _binding = FragmentSignInBinding.inflate(inflater, container, false)
 
+        openForgotPassword()
+
         binding.root.isFocusableInTouchMode = true
         binding.root.requestFocus()
         binding.root.setOnKeyListener { _, keyCode, _ ->
@@ -86,6 +88,12 @@ class SignInFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun openForgotPassword() {
+        binding.textViewForgotPassword.setOnClickListener {
+            findNavController().navigate(R.id.action_signInFragment_to_forgotPasswordFragment)
+        }
     }
 
     override fun onDestroyView() {
