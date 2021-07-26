@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "546282207220",
+    "project_id": "simpletasktodo-74fa7",
+    "storage_bucket": "simpletasktodo-74fa7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546282207220:android:49cdbc898363593869aba1",
+        "android_client_info": {
+          "package_name": "com.eslirodrigues.simpletasktodo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546282207220-ajfp1ef9p4v2kutknr86vddc6qk0rsrj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJVWQbyyQx7adwepJwZmtB8_izIrf7zZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546282207220-ajfp1ef9p4v2kutknr86vddc6qk0rsrj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,6 +6,7 @@ import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import com.eslirodrigues.simpletasktodo.adapter.TodoAdapter
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.databinding.FragmentListBinding
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
+import com.google.firebase.auth.FirebaseAuth
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -24,6 +26,8 @@ class ListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val todoViewModel: TodoViewModel by viewModel()
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +42,14 @@ class ListFragment : Fragment() {
         initRecyclerView()
         insertTodo()
         deleteTodos()
+
+        auth = FirebaseAuth.getInstance()
+
+        val user = auth.currentUser
+
+        if(user == null) {
+            findNavController().navigate(R.id.action_listFragment_to_signInFragment)
+        }
 
         return binding.root
     }
@@ -94,6 +106,11 @@ class ListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
+            R.id.menuLogOut -> {
+                auth.signOut()
+                findNavController().navigate(R.id.action_listFragment_to_signInFragment)
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

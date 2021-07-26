@@ -34,4 +34,7 @@
     <string name="are_you_sure_to_delete">Are you sure to delete?</string>
     <string name="confirm">Confirm</string>
     <string name="log_in">Log in</string>
+    <string name="forgot_pass_title">Forgot Password</string>
+    <string name="forgot_pass_description">Enter your email address, we\'ll send you a email to reset your password</string>
+    <string name="submit">Submit</string>
 </resources>
