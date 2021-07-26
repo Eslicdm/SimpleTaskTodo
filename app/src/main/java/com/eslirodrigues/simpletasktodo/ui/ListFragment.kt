@@ -1,12 +1,9 @@
 package com.eslirodrigues.simpletasktodo.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -15,6 +12,7 @@ import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.adapter.TodoAdapter
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.databinding.FragmentListBinding
+import com.eslirodrigues.simpletasktodo.util.hideKeyboard
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
 import com.google.firebase.auth.FirebaseAuth
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -77,8 +75,7 @@ class ListFragment : Fragment() {
                     binding.editTextTaskList.text.clear()
                 }
 
-                val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(view?.windowToken, 0)
+                hideKeyboard()
 
                 Toast.makeText(requireContext(), R.string.added, Toast.LENGTH_SHORT).show()
                 return@setOnEditorActionListener true
