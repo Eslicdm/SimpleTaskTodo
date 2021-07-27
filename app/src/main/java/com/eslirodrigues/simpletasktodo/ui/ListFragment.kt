@@ -66,7 +66,7 @@ class ListFragment : Fragment() {
     }
 
     private fun insertTodo() {
-        binding.editTextTaskList.setOnEditorActionListener { _, actionId, _ ->
+        binding.editTextTaskList.setOnEditorActionListener { view , actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 val inputText = binding.editTextTaskList.text.toString()
                 if (inputText.isNotEmpty()) {
@@ -75,7 +75,7 @@ class ListFragment : Fragment() {
                     binding.editTextTaskList.text.clear()
                 }
 
-                hideKeyboard()
+                view.hideKeyboard()
 
                 Toast.makeText(requireContext(), R.string.added, Toast.LENGTH_SHORT).show()
                 return@setOnEditorActionListener true
