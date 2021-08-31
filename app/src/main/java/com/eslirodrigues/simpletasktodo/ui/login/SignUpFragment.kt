@@ -55,6 +55,13 @@ class SignUpFragment : Fragment() {
                     val password: String =
                         binding.textInputEditTextPassword.text.toString().trim { it <= ' ' }
 
+                    val confirmedPassword: String = binding.textInputEditTextConfirmPassword.text.toString().trim { it <= ' ' }
+
+                    if(password != confirmedPassword) {
+                        Toast.makeText(requireContext(), "Password mismatch", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
