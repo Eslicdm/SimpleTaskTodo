@@ -45,7 +45,6 @@ class SignInFragment : Fragment() {
                 false
             }
         }
-        binding.root.isFocusableInTouchMode = false
     }
 
     private fun openSignUp() {
@@ -92,7 +91,7 @@ class SignInFragment : Fragment() {
 //                                val firebaseUser: FirebaseUser = task.result!!.user!!
                             Toast.makeText(
                                 requireContext(),
-                                "You were logged in successfully",
+                                "Login is successful",
                                 Toast.LENGTH_SHORT
                             ).show()
 

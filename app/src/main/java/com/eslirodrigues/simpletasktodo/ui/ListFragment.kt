@@ -13,6 +13,7 @@ import com.eslirodrigues.simpletasktodo.adapter.TodoAdapter
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.databinding.FragmentListBinding
 import com.eslirodrigues.simpletasktodo.util.hideKeyboard
+import com.eslirodrigues.simpletasktodo.util.setVisible
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
 import com.google.firebase.auth.FirebaseAuth
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,9 +38,11 @@ class ListFragment : Fragment() {
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbarTodo)
         setHasOptionsMenu(true)
 
+        binding.progressBarList.setVisible(true)
         initRecyclerView()
         insertTodo()
         deleteTodos()
+
 
         auth = FirebaseAuth.getInstance()
 
@@ -59,7 +62,12 @@ class ListFragment : Fragment() {
                 adapter = todoAdapter
                 layoutManager = LinearLayoutManager(context)
                 todoViewModel.readAllData.observe(viewLifecycleOwner) { todo ->
-                    todoAdapter.submitList(todo)
+                    if (todo.isEmpty()) {
+                        progressBarList.setVisible(true)
+                    } else {
+                        todoAdapter.submitList(todo)
+                        progressBarList.setVisible(false)
+                    }
                 }
             }
         }
