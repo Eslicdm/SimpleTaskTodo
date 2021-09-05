@@ -6,6 +6,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eslirodrigues.simpletasktodo.R
@@ -16,6 +17,8 @@ import com.eslirodrigues.simpletasktodo.util.hideKeyboard
 import com.eslirodrigues.simpletasktodo.util.setVisible
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -62,12 +65,13 @@ class ListFragment : Fragment() {
                 adapter = todoAdapter
                 layoutManager = LinearLayoutManager(context)
                 todoViewModel.readAllData.observe(viewLifecycleOwner) { todo ->
-                    if (todo.isEmpty()) {
-                        progressBarList.setVisible(true)
-                    } else {
+                    if (todo.isNotEmpty()) {
                         todoAdapter.submitList(todo)
                         progressBarList.setVisible(false)
+                    } else {
+                        progressBarList.setVisible(false)
                     }
+
                 }
             }
         }
