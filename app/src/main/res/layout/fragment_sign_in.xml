@@ -100,7 +100,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="4dp"
                     android:text="@string/forgot_pass" />
-
+                
                 <Button
                     android:id="@+id/buttonLogin"
                     android:layout_width="match_parent"
@@ -111,6 +111,14 @@
                     android:textColor="@android:color/white"
                     app:backgroundTint="@null" />
 
+                <TextView
+                    android:id="@+id/textViewEnterWithoutLogin"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/light_brown_darker"
+                    android:layout_gravity="center"
+                    android:text="@string/enter_without_login" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

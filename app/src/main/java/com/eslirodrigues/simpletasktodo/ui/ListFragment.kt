@@ -29,7 +29,7 @@ class ListFragment : Fragment() {
 
     private val todoViewModel: TodoViewModel by viewModel()
 
-    private lateinit var auth: FirebaseAuth
+    private val auth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,15 +45,6 @@ class ListFragment : Fragment() {
         initRecyclerView()
         insertTodo()
         deleteTodos()
-
-
-        auth = FirebaseAuth.getInstance()
-
-        val user = auth.currentUser
-
-        if(user == null) {
-            findNavController().navigate(R.id.action_listFragment_to_signInFragment)
-        }
 
         return binding.root
     }
@@ -110,11 +101,21 @@ class ListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_top, menu)
+        val user = auth.currentUser
+        if (user != null) {
+            menu.findItem(R.id.menuLogIn).isVisible = false
+        } else {
+            menu.findItem(R.id.menuLogOut).isVisible = false
+        }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
+            R.id.menuLogIn -> {
+                findNavController().navigate(R.id.action_listFragment_to_signInFragment)
+                return true
+            }
             R.id.menuLogOut -> {
                 auth.signOut()
                 findNavController().navigate(R.id.action_listFragment_to_signInFragment)

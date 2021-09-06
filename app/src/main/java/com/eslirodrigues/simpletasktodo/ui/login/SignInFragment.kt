@@ -31,6 +31,10 @@ class SignInFragment : Fragment() {
         openSignUp()
         logIn()
 
+        binding.textViewEnterWithoutLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_signInFragment_to_listFragment)
+        }
+
         return binding.root
     }
 
