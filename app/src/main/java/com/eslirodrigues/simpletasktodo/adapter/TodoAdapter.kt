@@ -16,11 +16,8 @@ import com.eslirodrigues.simpletasktodo.ui.ListFragmentDirections
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
 
 class TodoAdapter(
-    private val newListVisibility: Boolean,
     private val viewModel: TodoViewModel
 ) : ListAdapter<Todo, TodoViewHolder>(DIFF_CALLBACK) {
-
-    private var todos = mutableListOf<Todo>()
 
     class TodoViewHolder(val binding: TodoListBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -31,17 +28,6 @@ class TodoAdapter(
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val curTask = getItem(position)
         holder.binding.apply {
-            if (newListVisibility) {
-                imageViewExtendedItem.setOnClickListener {
-                    val title = curTask.todo
-                    val action =
-                        ListFragmentDirections.actionListFragmentToExtendedListFragment(title)
-                    Navigation.findNavController(it).navigate(action)
-                }
-            } else {
-                imageViewExtendedItem.visibility = View.INVISIBLE
-            }
-
             textViewItem.text = curTask.todo
 
             checkboxItem.isChecked = curTask.isChecked
@@ -64,11 +50,6 @@ class TodoAdapter(
         } else {
             taskText.paintFlags = taskText.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
         }
-    }
-
-    fun setData(todo: MutableList<Todo>) {
-        this.todos = todo
-        notifyDataSetChanged()
     }
 
     companion object {
