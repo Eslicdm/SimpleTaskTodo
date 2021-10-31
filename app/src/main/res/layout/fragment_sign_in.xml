@@ -116,7 +116,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/light_brown_darker"
+                    android:textColor="@color/light_dark_brown"
                     android:layout_gravity="center"
                     android:text="@string/enter_without_login" />
 
@@ -138,7 +138,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/sign_up"
-                        android:textColor="@color/light_brown_darker" />
+                        android:textColor="@color/light_dark_brown" />
                 </LinearLayout>
 
             </LinearLayout>

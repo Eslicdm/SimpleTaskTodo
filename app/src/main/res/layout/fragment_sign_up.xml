@@ -135,7 +135,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/log_in"
-                        android:textColor="@color/light_brown_darker" />
+                        android:textColor="@color/light_dark_brown" />
                 </LinearLayout>
 
             </LinearLayout>

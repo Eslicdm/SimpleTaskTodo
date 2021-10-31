@@ -6,11 +6,20 @@
         <item name="colorPrimaryVariant">@color/light_brown</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_brown_darker</item>
-        <item name="colorSecondaryVariant">@color/light_brown_darker</item>
+        <item name="colorSecondary">@color/light_dark_brown</item>
+        <item name="colorSecondaryVariant">@color/light_dark_brown</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondary</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.SimpleTaskTodo.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.NoteComposeRoomHiltTest.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.NoteComposeRoomHiltTest.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

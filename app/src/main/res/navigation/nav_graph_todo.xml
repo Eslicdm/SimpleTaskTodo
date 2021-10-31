@@ -11,9 +11,6 @@
         android:label="Main List"
         tools:layout="@layout/fragment_list">
         <action
-            android:id="@+id/action_listFragment_to_extendedListFragment"
-            app:destination="@id/extendedListFragment" />
-        <action
             android:id="@+id/action_listFragment_to_updateDialogFragment"
             app:destination="@id/updateDialogFragment" />
         <action
@@ -23,17 +20,6 @@
             android:id="@+id/action_listFragment_to_signInFragment"
             app:destination="@id/signInFragment"
             app:popUpTo="@id/signInFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/extendedListFragment"
-        android:name="com.eslirodrigues.simpletasktodo.ui.ExtendedListFragment"
-        android:label="Extended List"
-        tools:layout="@layout/fragment_extended_list">
-        <argument
-            android:name="title"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
     </fragment>
     <dialog
         android:id="@+id/updateDialogFragment"
