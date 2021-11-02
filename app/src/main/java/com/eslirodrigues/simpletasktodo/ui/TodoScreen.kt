@@ -19,12 +19,26 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.eslirodrigues.simpletasktodo.R
+import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.ui.theme.LightBrown
 import com.eslirodrigues.simpletasktodo.ui.theme.LightDarkBrown
 
 @Composable
 fun TodoScreen() {
     var showMenu by remember { mutableStateOf(false) }
+    val todoList = listOf(
+        Todo(1, "Task 1 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", true),
+        Todo(2, "Task 2 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false),
+        Todo(3, "Task 3 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", true),
+        Todo(4, "Task 4 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", true),
+        Todo(5, "Task 5 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false),
+        Todo(6, "Task 5 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false),
+        Todo(7, "Task 5 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false),
+        Todo(8, "Task 5 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false),
+        Todo(9, "Task 5 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false),
+        Todo(10, "Task 5 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false),
+        Todo(11, "Task 5 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false)
+    )
 
     Scaffold(
         topBar = {
@@ -70,7 +84,11 @@ fun TodoScreen() {
                 .background(LightBrown)
                 .fillMaxSize()
         ) {
-
+            LazyColumn {
+                items(todoList) { todoListItem ->
+                    TodoListItem(todo = todoListItem)
+                }
+            }
         }
     }
 }

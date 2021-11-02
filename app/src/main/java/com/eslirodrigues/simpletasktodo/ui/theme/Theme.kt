@@ -10,9 +10,8 @@ import com.eslirodrigues.simpletasktodo.ui.theme.LightBlue
 
 private val LightColorPalette = lightColors(
     primary = LightDarkBrown,
-    background = DarkGray,
-    onBackground = LightBrown,
-    surface = LightBrown,
+    background = Color.White,
+    surface = Color.White,
 )
 
 @Composable
