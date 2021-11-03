@@ -1,8 +1,9 @@
 package com.eslirodrigues.simpletasktodo.ui
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -10,9 +11,10 @@ import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,9 +22,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.ui.theme.LightDarkBrown
+import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun TodoListItem(todo: Todo) {
+    val todoIsChecked = rememberSaveable { mutableStateOf(todo.isChecked) }
+    val viewModel = getViewModel<TodoViewModel>()
+
     Card(
         modifier = Modifier
             .padding(horizontal = 10.dp, vertical = 5.dp)
@@ -30,16 +37,12 @@ fun TodoListItem(todo: Todo) {
         elevation = 2.dp,
         shape = RoundedCornerShape(corner = CornerSize(14.dp))
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { /* TODO editTodo */  },
-        ) {
-            if(!todo.isChecked)  {
+        Box {
+            if(!todoIsChecked.value)  {
                 Text(
                     text = todo.todo,
                     modifier = Modifier
-                        .width(363.dp)
+                        .width(340.dp)
                         .padding(10.dp),
                     fontSize = 20.sp
                 )
@@ -47,24 +50,28 @@ fun TodoListItem(todo: Todo) {
                 Text(
                     text = todo.todo,
                     modifier = Modifier
-                        .width(363.dp)
+                        .width(340.dp)
                         .padding(10.dp),
                     fontSize = 20.sp,
                     style = TextStyle(textDecoration = TextDecoration.LineThrough)
                 )
             }
             Checkbox(
-                checked = todo.isChecked,
-                onCheckedChange = {todo.isChecked = !todo.isChecked},
+                checked = todoIsChecked.value,
+                onCheckedChange = {
+                    todoIsChecked.value = it
+                    todo.isChecked = todoIsChecked.value
+                    viewModel.updateTodo(todo)
+                },
                 colors = CheckboxDefaults.colors(LightDarkBrown),
                 modifier = Modifier
-                    .align(Alignment.CenterVertically)
-                    .padding(10.dp, end = 25.dp)
+                    .align(Alignment.CenterEnd)
+                    .padding(horizontal = 25.dp)
             )
         }
-        
     }
 }
+
 
 @Preview
 @Composable

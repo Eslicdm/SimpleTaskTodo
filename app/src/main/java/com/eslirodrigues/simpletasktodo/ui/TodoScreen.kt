@@ -17,6 +17,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +32,8 @@ import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.ui.theme.LightBrown
 import com.eslirodrigues.simpletasktodo.ui.theme.LightDarkBrown
+import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
+import org.koin.androidx.compose.getViewModel
 
 @ExperimentalComposeUiApi
 @ExperimentalAnimationApi
@@ -41,21 +44,9 @@ fun TodoScreen() {
     var showAddTask by remember { mutableStateOf(false) }
     var inputTask by remember { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
+    val viewModel = getViewModel<TodoViewModel>()
 //    val keyboardController = LocalSoftwareKeyboardController.current
-
-    val todoList = listOf(
-        Todo(1, "Task 1 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", true),
-        Todo(2, "Task 2 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false),
-        Todo(3, "Task 3 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", true),
-        Todo(4, "Task 4 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", true),
-        Todo(5, "Task 5 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false),
-        Todo(6, "Task 5 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false),
-        Todo(7, "Task 5 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false),
-        Todo(8, "Task 5 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false),
-        Todo(9, "Task 5 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false),
-        Todo(10, "Task 5 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false),
-        Todo(11, "Task 5 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false)
-    )
+    val todoList = viewModel.readAllData.observeAsState(listOf()).value
 
     Scaffold(
         topBar = {
@@ -91,7 +82,9 @@ fun TodoScreen() {
             Row {
                 AnimatedVisibility(visible = showAddTask) {
                     TextField(
-                        modifier = Modifier.padding(end = 16.dp),
+                        modifier = Modifier
+                            .width(300.dp)
+                            .padding(end = 16.dp),
                         value = inputTask,
                         onValueChange = {
                             inputTask = it
@@ -123,7 +116,7 @@ fun TodoScreen() {
                         ),
                         keyboardActions = KeyboardActions(
                             onDone = {
-                            /* TODO addTodo */
+                                viewModel.addTodo(Todo(todo = inputTask))
                                 focusManager.clearFocus()
                                 inputTask = ""
                                 showAddTask = !showAddTask
