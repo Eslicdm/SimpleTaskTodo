@@ -141,7 +141,14 @@ fun TodoScreen() {
 
                 FloatingActionButton(
                     backgroundColor = LightDarkBrown,
-                    onClick = { showAddTask = !showAddTask }
+                    onClick = {
+                        showAddTask = !showAddTask
+                        if(inputTask.isNotEmpty()) {
+                            viewModel.addTodo(Todo(todo = inputTask))
+                            inputTask = ""
+                        }
+
+                    }
                 ) {
                     if(showAddTask) {
                         Icon(
