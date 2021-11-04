@@ -12,6 +12,7 @@ import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,7 +28,8 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun TodoListItem(todo: Todo) {
-    val todoIsChecked = rememberSaveable { mutableStateOf(todo.isChecked) }
+    val todoIsChecked = remember { mutableStateOf(false) }
+    todoIsChecked.value = todo.isChecked
     val viewModel = getViewModel<TodoViewModel>()
 
     Card(

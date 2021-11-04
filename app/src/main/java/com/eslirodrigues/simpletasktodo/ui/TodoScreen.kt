@@ -14,6 +14,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.*
@@ -41,10 +42,12 @@ import org.koin.androidx.compose.getViewModel
 fun TodoScreen() {
     val scrollState = rememberLazyListState()
     var showMenu by remember { mutableStateOf(false) }
+    val showAlertDialogDelete = remember { mutableStateOf(false) }
     var showAddTask by remember { mutableStateOf(false) }
     var inputTask by remember { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
     val viewModel = getViewModel<TodoViewModel>()
+    val checkOpenDialog = viewModel.readCheckboxDataStore.observeAsState().value
 //    val keyboardController = LocalSoftwareKeyboardController.current
     val todoList = viewModel.readAllData.observeAsState(listOf()).value
 
@@ -62,6 +65,17 @@ fun TodoScreen() {
                         modifier = Modifier.padding(6.dp)
                     ) },
                 actions = {
+                    IconButton(
+                        onClick = {
+                            if (checkOpenDialog == true) {
+                                viewModel.deleteAllTodos()
+                            } else {
+                                showAlertDialogDelete.value = !showAlertDialogDelete.value
+                            }
+                        }
+                    ) {
+                        Icon(imageVector = Icons.Default.Delete, stringResource(id = R.string.delete_done), tint = Color.White)
+                    }
                     IconButton(onClick = { showMenu = !showMenu }) {
                         Icon(imageVector = Icons.Default.MoreVert, stringResource(id = R.string.more), tint = Color.White)
                     }
@@ -151,6 +165,7 @@ fun TodoScreen() {
                 .background(LightBrown)
                 .fillMaxSize()
         ) {
+            if(showAlertDialogDelete.value) AlertDialogDelete(showAlertDialogDelete)
             LazyColumn(state = scrollState) {
                 items(todoList) { todoListItem ->
                     TodoListItem(todo = todoListItem)
