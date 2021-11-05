@@ -1,5 +1,6 @@
 package com.eslirodrigues.simpletasktodo.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -29,6 +30,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun TodoListItem(todo: Todo) {
     val todoIsChecked = remember { mutableStateOf(false) }
+    val showAlertDialogUpdate = remember { mutableStateOf(false) }
     todoIsChecked.value = todo.isChecked
     val viewModel = getViewModel<TodoViewModel>()
 
@@ -39,7 +41,13 @@ fun TodoListItem(todo: Todo) {
         elevation = 2.dp,
         shape = RoundedCornerShape(corner = CornerSize(14.dp))
     ) {
-        Box {
+        Box(modifier = Modifier.clickable {
+            showAlertDialogUpdate.value = !showAlertDialogUpdate.value
+        }) {
+            if (showAlertDialogUpdate.value) AlertDialogUpdate(
+                todo = todo,
+                showAlertDialogUpdate = showAlertDialogUpdate
+            )
             if(!todoIsChecked.value)  {
                 Text(
                     text = todo.todo,

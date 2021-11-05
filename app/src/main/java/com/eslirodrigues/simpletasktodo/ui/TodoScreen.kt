@@ -147,7 +147,6 @@ fun TodoScreen() {
                             viewModel.addTodo(Todo(todo = inputTask))
                             inputTask = ""
                         }
-
                     }
                 ) {
                     if(showAddTask) {
