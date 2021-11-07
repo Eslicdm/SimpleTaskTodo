@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.ui.ExperimentalComposeUiApi
 import com.eslirodrigues.simpletasktodo.ui.TodoScreen
+import com.eslirodrigues.simpletasktodo.ui.login.ForgotPasswordScreen
 import com.eslirodrigues.simpletasktodo.ui.login.SignInScreen
 import com.eslirodrigues.simpletasktodo.ui.login.SignUpScreen
 import com.eslirodrigues.simpletasktodo.ui.theme.SimpleTaskTodoTheme
@@ -17,7 +18,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SimpleTaskTodoTheme {
-                SignUpScreen()
+                ForgotPasswordScreen()
             }
         }
     }
