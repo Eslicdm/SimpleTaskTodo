@@ -32,13 +32,16 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.ui.theme.DarkGray
 import com.eslirodrigues.simpletasktodo.ui.theme.LightBrown
 import com.eslirodrigues.simpletasktodo.ui.theme.LightDarkBrown
+import com.eslirodrigues.simpletasktodo.util.ScreenNav
+import org.koin.androidx.compose.get
 
 @Composable
-fun SignUpScreen() {
+fun SignUpScreen(navController: NavController = get()) {
     var inputEmail by remember { mutableStateOf("") }
     var iconEmailState by remember { mutableStateOf(false) }
     var inputPassword by remember { mutableStateOf("") }
@@ -219,7 +222,10 @@ fun SignUpScreen() {
                             .padding(end = 12.dp)
                             .align(Alignment.CenterVertically)
                             .clickable {
-                                /* TODO navToLogIn */
+                                navController.popBackStack(
+                                    route = ScreenNav.SignIn.route,
+                                    inclusive = false
+                                )
                             }
                     )
                 }

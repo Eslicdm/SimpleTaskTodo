@@ -29,17 +29,20 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.ui.theme.LightBrown
 import com.eslirodrigues.simpletasktodo.ui.theme.LightDarkBrown
+import com.eslirodrigues.simpletasktodo.util.ScreenNav
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
+import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 
 @ExperimentalComposeUiApi
 @ExperimentalAnimationApi
 @Composable
-fun TodoScreen() {
+fun TodoScreen(navController: NavController = get()) {
     val scrollState = rememberLazyListState()
     var showMenu by remember { mutableStateOf(false) }
     val showAlertDialogDelete = remember { mutableStateOf(false) }
@@ -84,7 +87,13 @@ fun TodoScreen() {
                         onDismissRequest = { showMenu = false },
                         modifier = Modifier.background(Color.White)
                     ) {
-                        DropdownMenuItem(onClick = { /*TODO navToLoginScreen*/ }) {
+                        DropdownMenuItem(
+                            onClick = {
+                                navController.navigate(
+                                     route = ScreenNav.SignIn.route
+                                )
+                            }
+                        ) {
                             Text(text = "Log in")
                         }
                     }

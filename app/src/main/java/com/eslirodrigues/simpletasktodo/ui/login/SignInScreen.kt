@@ -33,13 +33,16 @@ import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.ui.theme.DarkGray
 import com.eslirodrigues.simpletasktodo.ui.theme.LightBrown
 import com.eslirodrigues.simpletasktodo.ui.theme.LightDarkBrown
+import com.eslirodrigues.simpletasktodo.util.ScreenNav
+import org.koin.androidx.compose.get
 
 @Composable
-fun SignInScreen() {
+fun SignInScreen(navController: NavController = get()) {
     var inputEmail by remember { mutableStateOf("") }
     var iconEmailState by remember { mutableStateOf(false) }
     var inputPassword by remember { mutableStateOf("") }
@@ -140,7 +143,9 @@ fun SignInScreen() {
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                     keyboardActions = KeyboardActions(
                         onDone = {
-                            /* Login */
+                            navController.navigate(
+                                route = ScreenNav.Todo.route
+                            )
                         }
                     ),
                     visualTransformation = if (iconShowPasswordState) VisualTransformation.None else PasswordVisualTransformation(),
@@ -161,7 +166,9 @@ fun SignInScreen() {
                         .padding(end = 12.dp, top = 8.dp)
                         .align(Alignment.End)
                         .clickable {
-                            /* TODO navToForgotPass */
+                            navController.navigate(
+                                route = ScreenNav.ForgotPassword.route
+                            )
                         }
                 )
                 Button(
@@ -172,7 +179,11 @@ fun SignInScreen() {
                         .align(Alignment.CenterHorizontally),
                     colors = ButtonDefaults.buttonColors(backgroundColor = LightDarkBrown),
                     shape = RoundedCornerShape(corner = CornerSize(50.dp)),
-                    onClick = { /* TODO navToList */ }
+                    onClick = {
+                        navController.navigate(
+                            route = ScreenNav.Todo.route
+                        )
+                    }
                 ) {
                     Text(
                         text = stringResource(id = R.string.log_in).toUpperCase(Locale.current)
@@ -185,7 +196,9 @@ fun SignInScreen() {
                         .padding(end = 10.dp, bottom = 25.dp)
                         .align(Alignment.CenterHorizontally)
                         .clickable {
-                            /* TODO navToList */
+                            navController.navigate(
+                                route = ScreenNav.Todo.route,
+                            )
                         }
                 )
                 Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
@@ -202,7 +215,9 @@ fun SignInScreen() {
                             .padding(end = 12.dp)
                             .align(Alignment.CenterVertically)
                             .clickable {
-                                /* TODO navToSignUp */
+                                navController.navigate(
+                                    route = ScreenNav.SignUp.route
+                                )
                             }
                     )
                 }

@@ -25,13 +25,16 @@ import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.ui.theme.DarkGray
 import com.eslirodrigues.simpletasktodo.ui.theme.LightBrown
 import com.eslirodrigues.simpletasktodo.ui.theme.LightDarkBrown
+import com.eslirodrigues.simpletasktodo.util.ScreenNav
+import org.koin.androidx.compose.get
 
 @Composable
-fun ForgotPasswordScreen() {
+fun ForgotPasswordScreen(navController: NavController = get()) {
     var inputEmail by remember { mutableStateOf("") }
     var iconEmailState by remember { mutableStateOf(false) }
 
@@ -142,7 +145,9 @@ fun ForgotPasswordScreen() {
                             .padding(end = 12.dp)
                             .align(Alignment.CenterVertically)
                             .clickable {
-                                /* TODO navToSignUp */
+                                navController.navigate(
+                                    ScreenNav.SignUp.route
+                                )
                             }
                     )
                 }
