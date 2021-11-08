@@ -1,5 +1,8 @@
 package com.eslirodrigues.simpletasktodo.ui.login
 
+import android.content.Context
+import android.text.TextUtils
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -39,6 +43,7 @@ import com.eslirodrigues.simpletasktodo.ui.theme.DarkGray
 import com.eslirodrigues.simpletasktodo.ui.theme.LightBrown
 import com.eslirodrigues.simpletasktodo.ui.theme.LightDarkBrown
 import com.eslirodrigues.simpletasktodo.util.ScreenNav
+import com.google.firebase.auth.FirebaseAuth
 import org.koin.androidx.compose.get
 
 @Composable
@@ -49,6 +54,7 @@ fun SignInScreen(navController: NavController = get()) {
     var iconPasswordState by remember { mutableStateOf(false) }
     var iconShowPasswordState by remember { mutableStateOf(false) }
     val focusManager = LocalFocusManager.current
+    val context = LocalContext.current
 
     Box(
         modifier = Modifier
@@ -143,8 +149,11 @@ fun SignInScreen(navController: NavController = get()) {
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                     keyboardActions = KeyboardActions(
                         onDone = {
-                            navController.navigate(
-                                route = ScreenNav.Todo.route
+                            singIn(
+                                navController = navController,
+                                context = context,
+                                email = inputEmail,
+                                password = inputPassword
                             )
                         }
                     ),
@@ -180,8 +189,11 @@ fun SignInScreen(navController: NavController = get()) {
                     colors = ButtonDefaults.buttonColors(backgroundColor = LightDarkBrown),
                     shape = RoundedCornerShape(corner = CornerSize(50.dp)),
                     onClick = {
-                        navController.navigate(
-                            route = ScreenNav.Todo.route
+                        singIn(
+                            navController = navController,
+                            context = context,
+                            email = inputEmail,
+                            password = inputPassword
                         )
                     }
                 ) {
@@ -222,6 +234,53 @@ fun SignInScreen(navController: NavController = get()) {
                     )
                 }
             }
+        }
+    }
+}
+
+fun singIn(navController: NavController, context: Context, email: String, password: String) {
+    when {
+        TextUtils.isEmpty(
+            email.trim { it <= ' ' }) -> {
+            Toast.makeText(
+                context,
+                "Please Enter Email",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        TextUtils.isEmpty(
+            password.trim { it <= ' ' }) -> {
+            Toast.makeText(
+                context,
+                "Please Enter Password",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        else -> {
+            email.trim { it <= ' ' }
+            password.trim { it <= ' ' }
+
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(
+                            context,
+                            "Login is successful",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        navController.navigate(
+                            route = ScreenNav.Todo.route,
+                        )
+                    } else {
+                        Toast.makeText(
+                            context,
+                            task.exception!!.message.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
         }
     }
 }

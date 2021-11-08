@@ -36,6 +36,7 @@ import com.eslirodrigues.simpletasktodo.ui.theme.LightBrown
 import com.eslirodrigues.simpletasktodo.ui.theme.LightDarkBrown
 import com.eslirodrigues.simpletasktodo.util.ScreenNav
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
+import com.google.firebase.auth.FirebaseAuth
 import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 
@@ -53,6 +54,8 @@ fun TodoScreen(navController: NavController = get()) {
     val checkOpenDialog = viewModel.readCheckboxDataStore.observeAsState().value
 //    val keyboardController = LocalSoftwareKeyboardController.current
     val todoList = viewModel.readAllData.observeAsState(listOf()).value
+    val auth = FirebaseAuth.getInstance()
+    val currentUser = auth.currentUser
 
     Scaffold(
         topBar = {
@@ -87,14 +90,27 @@ fun TodoScreen(navController: NavController = get()) {
                         onDismissRequest = { showMenu = false },
                         modifier = Modifier.background(Color.White)
                     ) {
-                        DropdownMenuItem(
-                            onClick = {
-                                navController.navigate(
-                                     route = ScreenNav.SignIn.route
-                                )
+                        if (currentUser != null) {
+                            DropdownMenuItem(
+                                onClick = {
+                                    auth.signOut()
+                                    navController.popBackStack(
+                                        route = ScreenNav.SignIn.route, false
+                                    )
+                                }
+                            ) {
+                                Text(text = "Log out")
                             }
-                        ) {
-                            Text(text = "Log in")
+                        } else {
+                            DropdownMenuItem(
+                                onClick = {
+                                    navController.navigate(
+                                        route = ScreenNav.SignIn.route
+                                    )
+                                }
+                            ) {
+                                Text(text = "Log in")
+                            }
                         }
                     }
                 }
