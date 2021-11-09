@@ -1,5 +1,8 @@
 package com.eslirodrigues.simpletasktodo.ui.login
 
+import android.content.Context
+import android.text.TextUtils
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -33,11 +37,13 @@ import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.ui.theme.DarkGray
 import com.eslirodrigues.simpletasktodo.ui.theme.LightBrown
 import com.eslirodrigues.simpletasktodo.ui.theme.LightDarkBrown
 import com.eslirodrigues.simpletasktodo.util.ScreenNav
+import com.google.firebase.auth.FirebaseAuth
 import org.koin.androidx.compose.get
 
 @Composable
@@ -51,6 +57,7 @@ fun SignUpScreen(navController: NavController = get()) {
     var iconConfirmPasswordState by remember { mutableStateOf(false) }
     var iconConfirmShowPasswordState by remember { mutableStateOf(false) }
     val focusManager = LocalFocusManager.current
+    val context = LocalContext.current
 
     Box(
         modifier = Modifier
@@ -181,7 +188,13 @@ fun SignUpScreen(navController: NavController = get()) {
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                     keyboardActions = KeyboardActions(
                         onDone = {
-                            /* TODO Sign Up */
+                            signUp(
+                                navController = navController,
+                                context = context,
+                                email = inputEmail,
+                                password = inputPassword,
+                                confirmPassword = inputConfirmPassword
+                            )
                         }
                     ),
                     visualTransformation = if (iconConfirmShowPasswordState) VisualTransformation.None else PasswordVisualTransformation(),
@@ -202,7 +215,15 @@ fun SignUpScreen(navController: NavController = get()) {
                         .align(Alignment.CenterHorizontally),
                     colors = ButtonDefaults.buttonColors(backgroundColor = LightDarkBrown),
                     shape = RoundedCornerShape(corner = CornerSize(50.dp)),
-                    onClick = { /* TODO navToSignIn */ }
+                    onClick = {
+                        signUp(
+                            navController = navController,
+                            context = context,
+                            email = inputEmail,
+                            password = inputPassword,
+                            confirmPassword = inputConfirmPassword
+                        )
+                    }
                 ) {
                     Text(
                         text = stringResource(id = R.string.log_in).toUpperCase(Locale.current)
@@ -233,6 +254,61 @@ fun SignUpScreen(navController: NavController = get()) {
         }
     }
 }
+
+fun signUp(navController: NavController, context: Context, email: String, password: String, confirmPassword: String) {
+    when {
+        TextUtils.isEmpty(
+            email.trim { it <= ' ' }) -> {
+            Toast.makeText(
+                context,
+                "Please Enter email",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        TextUtils.isEmpty(
+            password.trim { it <= ' ' }) -> {
+            Toast.makeText(
+                context,
+                "Please Enter password",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        else -> {
+            email.trim { it <= ' ' }
+            password.trim { it <= ' ' }
+            confirmPassword.trim { it <= ' ' }
+
+            if(password != confirmPassword) {
+                Toast.makeText(context, "Password mismatch", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(
+                            context,
+                            "You were registered successfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        navController.navigate(
+                            ScreenNav.Todo.route
+                        )
+
+                    } else {
+                        Toast.makeText(
+                            context,
+                            task.exception!!.message.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+        }
+    }
+}
+
 
 @Preview
 @Composable
