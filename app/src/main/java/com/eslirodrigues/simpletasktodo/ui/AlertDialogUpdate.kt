@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
@@ -26,6 +27,8 @@ import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.ui.theme.LightBrown
 import com.eslirodrigues.simpletasktodo.ui.theme.LightDarkBrown
+import com.eslirodrigues.simpletasktodo.util.Constants.ALERT_UPDATE_CONFIRM
+import com.eslirodrigues.simpletasktodo.util.Constants.ALERT_UPDATE_TEXT_FIELD
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
 import org.koin.androidx.compose.getViewModel
 
@@ -43,6 +46,7 @@ fun AlertDialogUpdate(todo: Todo, showAlertDialogUpdate: MutableState<Boolean>) 
         onDismissRequest = { showAlertDialogUpdate.value = false },
         text = {
             TextField(
+                modifier = Modifier.testTag(ALERT_UPDATE_TEXT_FIELD),
                 value = inputTask.value,
                 onValueChange = {
                     inputTask.value = it
@@ -86,6 +90,7 @@ fun AlertDialogUpdate(todo: Todo, showAlertDialogUpdate: MutableState<Boolean>) 
         confirmButton = {
             TextButton(
                 modifier = Modifier
+                    .testTag(ALERT_UPDATE_CONFIRM)
                     .padding(
                         start = 5.dp,
                         end = 15.dp,

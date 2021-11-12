@@ -1,3 +1,3 @@
 #SimpleTaskTodo
 
-Todo App. Jetpack Navigation; Compose; MVVM; Room; AuthFirebase; Koin Injection
+Todo App. Jetpack Navigation; Compose; MVVM; Room; AuthFirebase; Koin Injection; Test

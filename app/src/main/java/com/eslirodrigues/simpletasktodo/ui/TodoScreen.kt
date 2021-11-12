@@ -23,6 +23,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -34,6 +35,9 @@ import com.eslirodrigues.simpletasktodo.R
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.ui.theme.LightBrown
 import com.eslirodrigues.simpletasktodo.ui.theme.LightDarkBrown
+import com.eslirodrigues.simpletasktodo.util.Constants.FAB_TODO_TAG
+import com.eslirodrigues.simpletasktodo.util.Constants.ICON_DELETE
+import com.eslirodrigues.simpletasktodo.util.Constants.TEXT_FIELD_ADD_TAG
 import com.eslirodrigues.simpletasktodo.util.ScreenNav
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -72,6 +76,7 @@ fun TodoScreen(navController: NavController = get()) {
                     ) },
                 actions = {
                     IconButton(
+                        modifier = Modifier.testTag(ICON_DELETE),
                         onClick = {
                             if (checkOpenDialog == true) {
                                 viewModel.deleteAllTodos()
@@ -122,6 +127,7 @@ fun TodoScreen(navController: NavController = get()) {
                 AnimatedVisibility(visible = showAddTask) {
                     TextField(
                         modifier = Modifier
+                            .testTag(TEXT_FIELD_ADD_TAG)
                             .width(300.dp)
                             .padding(end = 16.dp),
                         value = inputTask,
@@ -165,6 +171,7 @@ fun TodoScreen(navController: NavController = get()) {
                 }
 
                 FloatingActionButton(
+                    modifier = Modifier.testTag(FAB_TODO_TAG),
                     backgroundColor = LightDarkBrown,
                     onClick = {
                         showAddTask = !showAddTask

@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,6 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.eslirodrigues.simpletasktodo.data.model.Todo
 import com.eslirodrigues.simpletasktodo.ui.theme.LightDarkBrown
+import com.eslirodrigues.simpletasktodo.util.Constants.CHECKBOX_ITEM
+import com.eslirodrigues.simpletasktodo.util.Constants.TODO_UPDATE_ITEM
 import com.eslirodrigues.simpletasktodo.viewmodel.TodoViewModel
 import org.koin.androidx.compose.getViewModel
 
@@ -41,9 +44,12 @@ fun TodoListItem(todo: Todo) {
         elevation = 2.dp,
         shape = RoundedCornerShape(corner = CornerSize(14.dp))
     ) {
-        Box(modifier = Modifier.clickable {
-            showAlertDialogUpdate.value = !showAlertDialogUpdate.value
-        }) {
+        Box(modifier = Modifier
+            .testTag(TODO_UPDATE_ITEM)
+            .clickable {
+                showAlertDialogUpdate.value = !showAlertDialogUpdate.value
+            }
+        ) {
             if (showAlertDialogUpdate.value) AlertDialogUpdate(
                 todo = todo,
                 showAlertDialogUpdate = showAlertDialogUpdate
@@ -75,6 +81,7 @@ fun TodoListItem(todo: Todo) {
                 },
                 colors = CheckboxDefaults.colors(LightDarkBrown),
                 modifier = Modifier
+                    .testTag(CHECKBOX_ITEM)
                     .align(Alignment.CenterEnd)
                     .padding(horizontal = 25.dp)
             )
