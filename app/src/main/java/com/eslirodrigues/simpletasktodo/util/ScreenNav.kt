@@ -5,4 +5,5 @@ sealed class ScreenNav(val route: String) {
     object SignUp: ScreenNav(route = "sign_up_screen")
     object SignIn: ScreenNav(route = "sign_in_screen")
     object ForgotPassword: ScreenNav(route = "forgot_password_screen")
+    object SplashScreen: ScreenNav(route = "splash_screen")
 }
